@@ -58,7 +58,7 @@ foreach($sessions as $session){
 * convert telethon.session file to LiveProto file 
 
 ```bash
-php vendor/bin/sessionbridge convert --from telethon-sqlite --to liveproto-sqlite --session telethon.session
+php vendor/bin/sessionbridge --from telethon-sqlite --to liveproto-sqlite --session telethon.session
 ```
 
 ---

@@ -3,7 +3,7 @@
 
 declare(strict_types = 1);
 
-require __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
+require $GLOBALS['_composer_autoload_path'];
 
 require __DIR__.DIRECTORY_SEPARATOR.'colors.php';
 
@@ -15,41 +15,30 @@ function getArgv(string $index) : ? string {
 }
 
 function usage() : void {
-	echo colorize(text : 'Usage : sessionbridge convert --from <format> --to <format> --session <source>',fg : 'bright_yellow',options : ['bold']) , PHP_EOL;
-	echo colorize(text : 'Example : php vendor/bin/sessionbridge convert --from telethon-sqlite --to liveproto-sqlite --session telethon.session',fg : 'bright_blue',options : ['underline']) , PHP_EOL;
+	echo colorize(text : 'Usage : sessionbridge --from <format> --to <format> --session <source>',fg : 'bright_yellow',options : ['bold']) , PHP_EOL;
+	echo colorize(text : 'Example : php vendor/bin/sessionbridge --from telethon-sqlite --to liveproto-sqlite --session telethon.session',fg : 'bright_blue',options : ['underline']) , PHP_EOL;
 	exit(1);
 }
-
-$args = array_slice($argv,1);
-
-if(count($args) === 0) usage();
-
-$command = array_shift($args);
-
-if($command !== 'convert'):
-	echo colorize(text : '➥ Unknown command : '.$command,bg : 'red',options : ['bold']) , PHP_EOL;
-	usage();
-endif;
 
 if(is_null(getArgv('help')) === false) usage();
 
 $from = str_replace(chr(45),chr(95),getArgv('from'));
 
 if(function_exists('Tak\\SessionBridge\\from_'.$from) === false):
-	echo colorize(text : '➥ Unknown from : '.$from,bg : 'red',options : ['bold']) , PHP_EOL;
+	echo colorize(text : '➥ Unknown from : '.$from,fg : 'bright_cyan',bg : 'red',options : ['bold']) , PHP_EOL;
 	usage();
 endif;
 
 $to = str_replace(chr(45),chr(95),getArgv('to'));
 
 if(function_exists('Tak\\SessionBridge\\to_'.$to) === false):
-	echo colorize(text : '➥ Unknown to : '.$to,bg : 'red',options : ['bold']) , PHP_EOL;
+	echo colorize(text : '➥ Unknown to : '.$to,fg : 'bright_cyan',bg : 'red',options : ['bold']) , PHP_EOL;
 	usage();
 endif;
 
 $source = getArgv('session');
 
-echo colorize(text : 'ıllıllı Converting from '.$from.' to '.$to.' session',fg : 'black',bg : 'bright_yellow') , PHP_EOL;
+echo colorize(text : 'ıllıllı Converting from '.$from.' to '.$to.' session',fg : 'bright_magenta',bg : 'yellow') , PHP_EOL;
 
 try {
 	$sessions = call_user_func('Tak\\SessionBridge\\from_'.$from,$source);
