@@ -1,0 +1,67 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types = 1);
+
+require __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
+
+require __DIR__.DIRECTORY_SEPARATOR.'colors.php';
+
+function getArgv(string $index) : ? string {
+	$short = substr($index,0,1);
+	$options = getopt($short.chr(58),array($index.chr(58)));
+	$name = $options[$short] ?? $options[$index] ?? null;
+	return $name;
+}
+
+function usage() : void {
+	echo colorize(text : 'Usage : sessionbridge convert --from <format> --to <format> --session <source>',fg : 'bright_yellow',options : ['bold']) , PHP_EOL;
+	echo colorize(text : 'Example : php vendor/bin/sessionbridge convert --from telethon-sqlite --to liveproto-sqlite --session telethon.session',fg : 'bright_blue',options : ['underline']) , PHP_EOL;
+	exit(1);
+}
+
+$args = array_slice($argv,1);
+
+if(count($args) === 0) usage();
+
+$command = array_shift($args);
+
+if($command !== 'convert'):
+	echo colorize(text : '➥ Unknown command : '.$command,bg : 'red',options : ['bold']) , PHP_EOL;
+	usage();
+endif;
+
+if(is_null(getArgv('help')) === false) usage();
+
+$from = str_replace(chr(45),chr(95),getArgv('from'));
+
+if(function_exists('Tak\\SessionBridge\\from_'.$from) === false):
+	echo colorize(text : '➥ Unknown from : '.$from,bg : 'red',options : ['bold']) , PHP_EOL;
+	usage();
+endif;
+
+$to = str_replace(chr(45),chr(95),getArgv('to'));
+
+if(function_exists('Tak\\SessionBridge\\to_'.$to) === false):
+	echo colorize(text : '➥ Unknown to : '.$to,bg : 'red',options : ['bold']) , PHP_EOL;
+	usage();
+endif;
+
+$source = getArgv('session');
+
+echo colorize(text : 'ıllıllı Converting from '.$from.' to '.$to.' session',fg : 'black',bg : 'bright_yellow') , PHP_EOL;
+
+try {
+	$sessions = call_user_func('Tak\\SessionBridge\\from_'.$from,$source);
+
+	foreach($sessions as $session):
+		echo colorize(text : sprintf('⟩ %s : ',str_replace(chr(95),chr(32),$to)),fg : 'cyan',options : ['blink']);
+		echo call_user_func('Tak\\SessionBridge\\to_'.$to,$session) , PHP_EOL;
+	endforeach;
+
+	echo colorize(text : '✓ Done',fg : 'green',options : ['bold']) , PHP_EOL;
+} catch(Throwable $error){
+	echo colorize(text : sprintf('✘ Error : %s %d',$error->getMessage(),$error->getCode()),fg : 'bright_white',bg : 'red',options : ['bold']);
+}
+
+?>

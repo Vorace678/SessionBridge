@@ -1,0 +1,38 @@
+{
+    "name": "taknone/sessionbridge",
+    "homepage": "https://liveproto.dev",
+    "license": "MIT",
+    "description": "Migrate your Telegram session safely between libraries",
+    "type": "project",
+    "keywords": [
+        "telegram",
+        "client",
+        "converter",
+        "session",
+        "php",
+        "liveproto",
+        "tdata",
+        "telethon",
+        "pyrogram",
+        "madeline",
+        "opentele"
+    ],
+    "bin": ["bin/sessionbridge"],
+    "autoload": {
+        "psr-4": {
+            "Tak\\SessionBridge\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php-64bit": ">=8.4",
+        "taknone/liveproto": "*",
+        "taknone/attributes": "*",
+        "taknone/bootstrapper": "*",
+        "danog/madelineproto": "*"
+    }
+}
